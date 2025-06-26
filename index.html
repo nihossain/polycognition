@@ -14,18 +14,24 @@
             background-color: #F8F9FA;
             color: #212529;
         }
-        .text-primary { color: #6D47D9; }
-        .bg-primary { background-color: #6D47D9; }
-        .border-primary { border-color: #6D47D9; }
-        .text-secondary { color: #EC407A; }
-        .bg-secondary { background-color: #EC407A; }
-        .text-tertiary { color: #AB47BC; }
-        .bg-tertiary { background-color: #AB47BC; }
-        .text-accent { color: #26A69A; }
-        .bg-accent { background-color: #26A69A; }
-        .text-accent2 { color: #FF7043; }
-        .bg-accent2 { background-color: #FF7043; }
-        .bg-dark-gray { background-color: #2A2D34; }
+        /* New Color Palette based on logo */
+        .text-primary { color: #347EB3; } /* Medium Blue */
+        .bg-primary { background-color: #347EB3; }
+        .border-primary { border-color: #347EB3; }
+
+        .text-secondary { color: #5AC175; } /* Green */
+        .bg-secondary { background-color: #5AC175; }
+
+        .text-tertiary { color: #58B6D5; } /* Light Blue */
+        .bg-tertiary { background-color: #58B6D5; }
+
+        .text-accent { color: #233767; } /* Dark Blue */
+        .bg-accent { background-color: #233767; }
+
+        .text-accent2 { color: #99D590; } /* Light Green */
+        .bg-accent2 { background-color: #99D590; }
+
+        .bg-dark-gray { background-color: #2A2D34; } /* Retaining dark gray for header/footer */
 
         .stat-card {
             background-color: white;
@@ -73,12 +79,17 @@
 
     <header class="bg-dark-gray text-white py-6 px-4 md:px-8 shadow-sm">
         <nav class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-3xl font-extrabold text-primary">Polycognition AI</a>
-            <div class="hidden md:flex space-x-6">
+            <div class="flex items-center">
+                <a href="#" class="text-3xl font-extrabold text-primary flex items-center">
+                    Polycognition AI
+                </a>
+            </div>
+            
+            <div class="hidden md:flex space-x-6 items-center">
                 <a href="#problem" class="text-gray-300 hover:text-white transition-colors duration-200 py-2">Problem</a>
                 <a href="#solution" class="text-gray-300 hover:text-white transition-colors duration-200 py-2">Solution</a>
                 <a href="#benefits" class="text-gray-300 hover:text-white transition-colors duration-200 py-2">Benefits</a>
-                <a href="#contact" class="bg-primary hover:bg-[#5E35B1] text-white py-2 px-4 rounded-full font-semibold button-style">Request Demo</a>
+                <a href="#contact" class="bg-primary hover:bg-[#2A659A] text-white py-2 px-4 rounded-full font-semibold button-style">Request Demo</a>
             </div>
             <button class="md:hidden text-white text-2xl">&#9776;</button>
         </nav>
@@ -90,10 +101,10 @@
                 Automate. Optimize. Perfect. <br> The Future of Injection Molding is Here.
             </h1>
             <p class="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto mb-8 font-light">
-                Polycognition AI delivers a **closed-loop, lights-off system** leveraging advanced AI, Machine Learning, and Computer Vision to ensure **robust, defect-free, and in-spec molded parts** with unprecedented efficiency.
+                Polycognition AI delivers a closed-loop, lights-off system leveraging advanced AI, Machine Learning, and Computer Vision to ensure robust, defect-free, and in-spec molded parts with unprecedented efficiency.
             </p>
             <div class="space-y-4 md:space-y-0 md:space-x-6 flex flex-col md:flex-row justify-center items-center">
-                <a href="#contact" class="bg-primary hover:bg-[#5E35B1] text-white font-bold py-3 px-8 rounded-full text-lg button-style w-full md:w-auto">
+                <a href="#contact" class="bg-primary hover:bg-[#2A659A] text-white font-bold py-3 px-8 rounded-full text-lg button-style w-full md:w-auto">
                     Request a Demo
                 </a>
                 <a href="#benefits" class="bg-transparent border-2 border-white hover:bg-white hover:text-dark-gray text-white font-bold py-3 px-8 rounded-full text-lg button-style w-full md:w-auto">
@@ -175,17 +186,17 @@
                     <div class="bg-white rounded-lg shadow-sm p-6 border-b-3 border-primary hover:shadow-md transition-shadow duration-300">
                         <div class="text-5xl text-primary mb-4 text-center">&#128337;</div>
                         <h3 class="text-2xl font-bold text-center mb-2">Up to 50%</h3>
-                        <p class="text-gray-700 text-center text-sm">**Downtime Reduction** through predictive maintenance and autonomous adjustments.</p>
+                        <p class="text-gray-700 text-center text-sm">Downtime Reduction through predictive maintenance and autonomous adjustments.</p>
                     </div>
                     <div class="bg-white rounded-lg shadow-sm p-6 border-b-3 border-secondary hover:shadow-md transition-shadow duration-300">
                         <div class="text-5xl text-secondary mb-4 text-center">&#128176;</div>
                         <h3 class="text-2xl font-bold text-center mb-2">Up to 40%</h3>
-                        <p class="text-gray-700 text-center text-sm">**Maintenance Cost Savings** via proactive issue resolution and optimized machine health.</p>
+                        <p class="text-gray-700 text-center text-sm">Maintenance Cost Savings via proactive issue resolution and optimized machine health.</p>
                     </div>
                     <div class="bg-white rounded-lg shadow-sm p-6 border-b-3 border-accent hover:shadow-md transition-shadow duration-300">
                         <div class="text-5xl text-accent mb-4 text-center">&#128465;&#65039;</div>
                         <h3 class="text-2xl font-bold text-center mb-2">Up to 40%</h3>
-                        <p class="text-gray-700 text-center text-sm">**Scrap Rate Reduction** by preventing defects in real-time with 99.98% accurate quality control.</p>
+                        <p class="text-gray-700 text-center text-sm">Scrap Rate Reduction by preventing defects in real-time with 99.98% accurate quality control.</p>
                     </div>
                 </div>
                  <div class="mt-12 text-center text-gray-700 max-w-3xl mx-auto">
@@ -238,7 +249,7 @@
             <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
                     <h2 class="text-3xl md:text-4xl font-bold mb-6 text-primary">Massive Market, Sustainable Impact</h2>
-                    <p class="text-gray-700 text-lg mb-4 font-light">We operate at the convergence of a **$190B+ injection molding industry** and a **rapidly growing AI in manufacturing market (46% CAGR)**, ensuring immense potential.</p>
+                    <p class="text-gray-700 text-lg mb-4 font-light">We operate at the convergence of a $190B+ injection molding industry and a rapidly growing AI in manufacturing market (46% CAGR), ensuring immense potential.</p>
                     <p class="text-gray-700 text-lg mb-6 font-light">Polycognition AI not only boosts profitability but also champions environmental responsibility:</p>
                     <ul class="list-none space-y-4 text-gray-700">
                         <li class="flex items-center text-lg">
@@ -256,7 +267,7 @@
                     </ul>
                 </div>
                 <div class="relative bg-white rounded-lg shadow-sm p-8">
-                    <img src="https://placehold.co/600x400/6D47D9/ffffff?text=Industrial+AI+Vision" alt="Industrial AI Vision" class="rounded-lg mb-4">
+                    <img src="https://placehold.co/600x400/347EB3/ffffff?text=Industrial+AI+Vision" alt="Industrial AI Vision" class="rounded-lg mb-4">
                     <p class="text-gray-600 text-sm text-center">Polycognition AI integrates seamless AI vision with machine control to achieve a new level of manufacturing autonomy.</p>
                 </div>
             </div>
@@ -266,7 +277,7 @@
             <div class="container mx-auto max-w-3xl">
                 <h2 class="text-3xl md:text-4xl font-bold mb-6 text-primary">Ready to Transform Your Manufacturing?</h2>
                 <p class="text-gray-300 text-xl mb-8 font-light">Schedule a personalized consultation and discover how Polycognition AI can deliver defect-free, lights-off production for your business.</p>
-                <a href="mailto:invest@polycognition.ai" class="bg-secondary hover:bg-[#D8366D] text-white font-bold py-4 px-10 rounded-full text-xl button-style inline-block">
+                <a href="mailto:invest@polycognition.ai" class="bg-secondary hover:bg-[#47A364] text-white font-bold py-4 px-10 rounded-full text-xl button-style inline-block">
                     Schedule a Consultation
                 </a>
             </div>
