@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Polycognition AI: Autonomous, Defect-Free Injection Molding</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -14,7 +15,7 @@
             background-color: #F8F9FA;
             color: #212529;
         }
-        /* New Color Palette based on logo */
+        /* Color Palette based on logo */
         .text-primary { color: #347EB3; } /* Medium Blue */
         .bg-primary { background-color: #347EB3; }
         .border-primary { border-color: #347EB3; }
@@ -31,19 +32,19 @@
         .text-accent2 { color: #99D590; } /* Light Green */
         .bg-accent2 { background-color: #99D590; }
 
-        .bg-dark-gray { background-color: #2A2D34; } /* Retaining dark gray for header/footer */
+        .bg-dark-gray { background-color: #2A2D34; }
 
         .stat-card {
             background-color: white;
             border-radius: 0.75rem;
             padding: 1.5rem;
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* Lighter shadow */
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-left: 3px solid; /* Thinner border */
+            border-left: 3px solid;
             height: 100%;
         }
         .flow-step {
@@ -52,15 +53,15 @@
             align-items: center;
             text-align: center;
             flex: 1;
-            padding: 1.5rem; /* More padding */
+            padding: 1.5rem;
             border-radius: 0.75rem;
-            transition: transform 0.2s ease-in-out; /* Simpler transition */
-            background-color: white; /* Ensure background is white */
-            border: 1px solid #E5E7EB; /* Subtle border */
+            transition: transform 0.2s ease-in-out;
+            background-color: white;
+            border: 1px solid #E5E7EB;
         }
         .flow-step:hover {
-            transform: translateY(-3px); /* Less dramatic lift */
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05); /* Subtle hover shadow */
+            transform: translateY(-3px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
         }
         .icon-large {
             font-size: 3rem;
@@ -68,10 +69,24 @@
         }
         .button-style {
             transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, color 0.2s ease-in-out;
-            box-shadow: none; /* Remove shadows from buttons */
+            box-shadow: none;
         }
         .button-style:hover {
-            box-shadow: none; /* No shadow on hover */
+            box-shadow: none;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
         }
     </style>
 </head>
@@ -127,13 +142,46 @@
                     <div class="stat-card border-primary">
                         <p class="text-5xl md:text-6xl font-black text-primary">12%</p>
                         <p class="mt-2 text-xl font-semibold">Average Scrap Rate</p>
-                        <p class="text-gray-600 mt-1 text-sm">Significant portion of production failing quality checks.</p>
+                        <p class="text-gray-600 mt-1 text-sm">Significant portion of production failing quality checks (up to 17.46% for specific products).</p>
                     </div>
                     <div class="stat-card border-tertiary">
                         <p class="text-5xl md:text-6xl font-black text-tertiary">30%</p>
                         <p class="mt-2 text-xl font-semibold">Micro-Defects Missed</p>
-                        <p class="text-gray-600 mt-1 text-sm">Unreliable manual inspections lead to downstream failures.</p>
+                        <p class="text-gray-600 mt-1 text-sm">Unreliable manual inspections lead to downstream failures (NIST reports).</p>
                     </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-6 mt-12">
+                    <h3 class="text-2xl font-bold text-center mb-6 text-primary">Key Root Causes of Defects</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <div class="chart-container h-64 md:h-80">
+                            <canvas id="defectCausesChart"></canvas>
+                        </div>
+                        <div class="text-left text-gray-700 space-y-4">
+                            <div class="flex items-start">
+                                <span class="text-2xl text-secondary mr-3 mt-1">&#9673;</span>
+                                <div>
+                                    <h4 class="font-bold text-lg">Machine Wear (45% of defects)</h4>
+                                    <p class="text-sm">Undetected degradation (e.g., screw barrels reduce melting efficiency by 30%).</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl text-primary mr-3 mt-1">&#9673;</span>
+                                <div>
+                                    <h4 class="font-bold text-lg">Material Inconsistencies (35% of defects)</h4>
+                                    <p class="text-sm">10% humidity increase can alter resin viscosity by 15%, causing flaws.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <span class="text-2xl text-tertiary mr-3 mt-1">&#9673;</span>
+                                <div>
+                                    <h4 class="font-bold text-lg">Human & Process Error (20% of defects)</h4>
+                                    <p class="text-sm">Fatigue and subjective inspections introduce significant variability.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center text-gray-600 mt-6 text-sm">These interconnected issues, from material variability to labor shortages and complex designs, underscore the need for a holistic solution.</p>
                 </div>
             </div>
         </section>
@@ -246,29 +294,119 @@
         </section>
 
         <section id="market-sustainability" class="py-16 px-4 md:px-8">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary">Massive Market, Sustainable Impact</h2>
+                <p class="text-center text-gray-700 max-w-4xl mx-auto mb-12 font-light">We operate at the convergence of a $190B+ injection molding industry and a rapidly growing AI in manufacturing market (46% CAGR), ensuring immense potential.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-12">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-primary">Market Growth Projections</h3>
+                        <div class="chart-container h-72 md:h-80">
+                            <canvas id="marketGrowthChart"></canvas>
+                        </div>
+                        <p class="text-center text-gray-600 mt-6 text-sm">The injection molding market shows steady growth, while AI in manufacturing is experiencing explosive expansion, creating a dual-engine growth strategy.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm p-8 flex flex-col items-center text-center">
+                        <img src="https://placehold.co/600x400/347EB3/ffffff?text=Industrial+AI+Vision" alt="Industrial AI Vision" class="rounded-lg mb-4">
+                        <p class="text-gray-600 text-sm text-center">Polycognition AI integrates seamless AI vision with machine control to achieve a new level of manufacturing autonomy.</p>
+                        <h3 class="text-2xl font-bold text-primary mt-6 mb-4">AI Adoption Accelerating</h3>
+                        <p class="text-5xl font-black text-secondary">78%</p>
+                        <p class="text-gray-600 mt-1 text-lg">of organizations reported using AI in 2024 (up from 55% in 2023).</p>
+                        <p class="text-5xl font-black text-tertiary mt-6">92%</p>
+                        <p class="text-gray-600 mt-1 text-lg">of senior manufacturing executives believe AI will enhance productivity.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="text-2xl font-bold text-center mb-6 text-primary">AI in Manufacturing by Application (2023)</h3>
+                        <div class="chart-container h-72 md:h-80">
+                            <canvas id="marketApplicationChart"></canvas>
+                        </div>
+                        <p class="text-center text-gray-600 mt-6 text-sm">Our focus areas, predictive maintenance and quality control, represent rapidly gaining traction within AI applications.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm p-6">
+                        <h3 class="text-2xl font-bold text-center mb-6 text-primary">AI in Manufacturing by End-Use Industry (2023)</h3>
+                        <div class="chart-container h-72 md:h-80">
+                            <canvas id="marketEndUseChart"></canvas>
+                        </div>
+                        <p class="text-center text-gray-600 mt-6 text-sm">We target high-value sectors like Medical Devices (dominant) and Automotive (fastest growing), where precision is paramount.</p>
+                    </div>
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-bold text-center mt-16 mb-12 text-primary">Driving a Sustainable Future</h2>
+                <p class="text-center text-gray-700 max-w-3xl mx-auto mb-12 font-light">Polycognition AI not only boosts profitability but also champions environmental responsibility:</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 bg-white rounded-lg shadow-sm p-6 text-center">
+                    <div class="flex flex-col items-center p-4">
+                        <div class="text-5xl text-accent mb-3">&#128302;</div>
+                        <h3 class="font-bold text-xl mb-2">Reduced Material Waste</h3>
+                        <p class="text-gray-700 text-sm">Precise process control and defect prevention drastically minimize scrap, leading to less raw material consumption and landfill waste.</p>
+                    </div>
+                    <div class="flex flex-col items-center p-4">
+                        <div class="text-5xl text-accent mb-3">&#9889;</div>
+                        <h3 class="font-bold text-xl mb-2">Optimized Energy Consumption</h3>
+                        <p class="text-gray-700 text-sm">Intelligent energy management systems and optimized cycle times reduce the overall energy footprint of injection molding operations.</p>
+                    </div>
+                    <div class="flex flex-col items-center p-4">
+                        <div class="text-5xl text-accent mb-3">&#127757;</div>
+                        <h3 class="font-bold text-xl mb-2">Support for Circular Economy</h3>
+                        <p class="text-gray-700 text-sm">Our system can better manage the variability of recycled materials, enabling higher quality output from sustainable sources.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="impact" class="py-16 px-4 md:px-8 bg-gray-50">
+            <div class="container mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-primary">The Impact in Action: Real-World Gains</h2>
+                <p class="text-center text-gray-700 max-w-4xl mx-auto mb-12 font-light">Our approach is validated by existing industry case studies demonstrating the power of AI in manufacturing. Polycognition AI extends these benefits into a holistic, closed-loop solution.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-lg shadow-sm p-6 border-l-3 border-secondary">
+                        <h3 class="text-xl font-bold text-secondary mb-2">BMW Pilot Project</h3>
+                        <p class="text-gray-700 text-sm">Integrated vision AI into bumper production, resulting in a 34% reduction in scrap rates and significantly improved quality consistency.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm p-6 border-l-3 border-primary">
+                        <h3 class="text-xl font-bold text-primary mb-2">Toyota's Engel iQ Weight Control</h3>
+                        <p class="text-gray-700 text-sm">Dynamically adjusted shot size based on real-time resin density fluctuations, leading to 15% reduced cycle times, 9% energy savings, and $1.2 million saved annually.</p>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm p-6 border-l-3 border-tertiary">
+                        <h3 class="text-xl font-bold text-tertiary mb-2">Medtronic's Arburg APC Plus</h3>
+                        <p class="text-gray-700 text-sm">Stabilized melt viscosity during catheter production, reducing scrap by 27% and ensuring adherence to stringent FDA tolerances.</p>
+                    </div>
+                </div>
+                 <div class="mt-12 text-center text-gray-700 max-w-4xl mx-auto">
+                    <p class="text-xl font-semibold">These examples underscore the massive potential. Polycognition AI aims to combine and expand upon these individual successes into one integrated, self-optimizing system.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="differentiators" class="py-16 px-4 md:px-8">
             <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-primary">Massive Market, Sustainable Impact</h2>
-                    <p class="text-gray-700 text-lg mb-4 font-light">We operate at the convergence of a $190B+ injection molding industry and a rapidly growing AI in manufacturing market (46% CAGR), ensuring immense potential.</p>
-                    <p class="text-gray-700 text-lg mb-6 font-light">Polycognition AI not only boosts profitability but also champions environmental responsibility:</p>
-                    <ul class="list-none space-y-4 text-gray-700">
-                        <li class="flex items-center text-lg">
-                            <span class="text-accent text-3xl mr-3">&#128302;</span>
-                            <span class="font-semibold">Reduced Material Waste:</span> Minimize scrap and raw material consumption.
-                        </li>
-                        <li class="flex items-center text-lg">
-                            <span class="text-accent text-3xl mr-3">&#9889;</span>
-                            <span class="font-semibold">Optimized Energy Use:</span> Intelligent systems cut energy footprint.
-                        </li>
-                        <li class="flex items-center text-lg">
-                            <span class="text-accent text-3xl mr-3">&#127757;</span>
-                            <span class="font-semibold">Circular Economy Support:</span> Better manages recycled materials for higher quality output.
-                        </li>
-                    </ul>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6 text-primary">Why Polycognition AI? Our Unmatched Advantage</h2>
+                    <p class="text-gray-700 text-lg mb-8 font-light">While competitors offer partial solutions, Polycognition AI provides a comprehensive, fully autonomous platform that sets a new industry standard.</p>
+                    <div class="chart-container h-80 md:h-96">
+                        <canvas id="competitiveAdvantageChart"></canvas>
+                    </div>
                 </div>
-                <div class="relative bg-white rounded-lg shadow-sm p-8">
-                    <img src="https://placehold.co/600x400/347EB3/ffffff?text=Industrial+AI+Vision" alt="Industrial AI Vision" class="rounded-lg mb-4">
-                    <p class="text-gray-600 text-sm text-center">Polycognition AI integrates seamless AI vision with machine control to achieve a new level of manufacturing autonomy.</p>
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-xl font-bold text-primary">True Closed-Loop Autonomy</h4>
+                        <p class="text-gray-700 text-sm">Our system is AI-native, not just AI-assisted. It autonomously corrects issues, enabling a self-optimizing production line with minimal human intervention for error correction.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-primary">Comprehensive Defect Elimination</h4>
+                        <p class="text-gray-700 text-sm">With 99.98% computer vision accuracy and predictive analytics, we target a near-zero defect rate by addressing all root causes of failure simultaneously.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-primary">Full "Lights-Off" Capability</h4>
+                        <p class="text-gray-700 text-sm">We integrate robotics and automated material handling with intelligent safety monitoring to deliver a truly unmanned, 24/7 operational model, not just a slogan.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-xl font-bold text-primary">Sustainability Enablement</h4>
+                        <p class="text-gray-700 text-sm">Our system effectively manages the variability of recycled materials, supporting green initiatives and enabling higher quality output from sustainable sources.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -291,5 +429,266 @@
         </div>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const FONT_COLOR = '#212529';
+            const GRID_COLOR = '#E9ECEF';
+            const PALETTE = {
+                primary: '#347EB3',  // Medium Blue
+                secondary: '#5AC175', // Green
+                tertiary: '#58B6D5',  // Light Blue
+                accent: '#233767',   // Dark Blue
+                accent2: '#99D590'   // Light Green
+            };
+
+            function processLabels(labels) {
+                return labels.map(label => {
+                    if (label.length > 16) {
+                        const words = label.split(' ');
+                        const newLabels = [];
+                        let currentLine = '';
+                        words.forEach(word => {
+                            if ((currentLine + ' ' + word).trim().length > 16) {
+                                newLabels.push(currentLine.trim());
+                                currentLine = word;
+                            } else {
+                                currentLine = (currentLine + ' ' + word).trim();
+                            }
+                        });
+                        if (currentLine) {
+                            newLabels.push(currentLine.trim());
+                        }
+                        return newLabels;
+                    }
+                    return label;
+                });
+            }
+            
+            const universalTooltipCallback = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            // Defect Causes Chart
+            new Chart(document.getElementById('defectCausesChart'), {
+                type: 'doughnut',
+                data: {
+                    labels: ['Machine Wear', 'Material Inconsistencies', 'Human & Process Error'],
+                    datasets: [{
+                        label: 'Root Causes of Defects',
+                        data: [45, 35, 20],
+                        backgroundColor: [PALETTE.secondary, PALETTE.primary, PALETTE.tertiary],
+                        borderColor: '#F8F9FA',
+                        borderWidth: 4,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: universalTooltipCallback.plugins.tooltip
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            // Market Growth Chart
+            new Chart(document.getElementById('marketGrowthChart'), {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026', '2027', '2028', '2029'],
+                    datasets: [
+                        {
+                            label: 'AI in Manufacturing Market ($B)',
+                            data: [3.2, 4.0, 5.3, 7.8, 11.5, 17.0, 25.1, 36.9, 47.8, 60.0],
+                            borderColor: PALETTE.secondary,
+                            backgroundColor: 'rgba(90, 193, 117, 0.2)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3,
+                            yAxisID: 'y-ai'
+                        },
+                        {
+                            label: 'Plastic Injection Molding Market ($B)',
+                            data: [191, 194, 198.8, 206.9, 215.4, 224.2, 233.4, 243.0, 252.9, 263.2],
+                            borderColor: PALETTE.primary,
+                            backgroundColor: 'rgba(52, 126, 179, 0.2)',
+                            tension: 0.4,
+                            fill: true,
+                            borderWidth: 3,
+                            yAxisID: 'y-molding'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { color: FONT_COLOR } },
+                        tooltip: universalTooltipCallback.plugins.tooltip,
+                        title: { display: true, text: 'Global Market Growth Projections', color: FONT_COLOR, font: { size: 16 }}
+                    },
+                    scales: {
+                        x: { grid: { color: GRID_COLOR }, ticks: { color: FONT_COLOR } },
+                        'y-ai': { 
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: 'AI Market ($B)', color: FONT_COLOR },
+                            grid: { color: GRID_COLOR }, ticks: { color: FONT_COLOR }
+                        },
+                        'y-molding': {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: 'Molding Market ($B)', color: FONT_COLOR },
+                            grid: { drawOnChartArea: false },
+                            ticks: { color: FONT_COLOR }
+                        }
+                    }
+                }
+            });
+
+            // Market Application Chart
+            new Chart(document.getElementById('marketApplicationChart'), {
+                type: 'bar',
+                data: {
+                    labels: processLabels(['Production Planning', 'Predictive Maintenance & Machinery Inspection', 'Quality Control', 'Design & Simulation', 'Others']),
+                    datasets: [{
+                        label: 'Market Share (%)',
+                        data: [35, 30, 20, 10, 5],
+                        backgroundColor: [
+                            PALETTE.primary,
+                            PALETTE.secondary,
+                            PALETTE.tertiary,
+                            PALETTE.accent,
+                            PALETTE.accent2
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: universalTooltipCallback.plugins.tooltip,
+                        title: { display: true, text: 'AI in Manufacturing by Application (2023)', color: FONT_COLOR, font: { size: 16 }}
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: { color: GRID_COLOR },
+                            ticks: { color: FONT_COLOR, callback: function(value) { return value + '%' } }
+                        },
+                        y: {
+                           grid: { display: false },
+                           ticks: { color: FONT_COLOR }
+                        }
+                    }
+                }
+            });
+
+            // Market End-Use Chart
+            new Chart(document.getElementById('marketEndUseChart'), {
+                type: 'bar',
+                data: {
+                    labels: processLabels(['Medical Devices', 'Automotive', 'Electronics & Semiconductors', 'Consumer Goods', 'Industrial Machinery', 'Others']),
+                    datasets: [{
+                        label: 'Market Share (%)',
+                        data: [25, 20, 15, 10, 10, 20],
+                        backgroundColor: [
+                            PALETTE.primary,
+                            PALETTE.secondary,
+                            PALETTE.tertiary,
+                            PALETTE.accent,
+                            PALETTE.accent2,
+                            '#ABB8C3' // Neutral gray-blue for 'Others'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: universalTooltipCallback.plugins.tooltip,
+                        title: { display: true, text: 'AI in Manufacturing by End-Use Industry (2023)', color: FONT_COLOR, font: { size: 16 }}
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            grid: { color: GRID_COLOR },
+                            ticks: { color: FONT_COLOR, callback: function(value) { return value + '%' } }
+                        },
+                        y: {
+                           grid: { display: false },
+                           ticks: { color: FONT_COLOR }
+                        }
+                    }
+                }
+            });
+
+            // Competitive Advantage Chart
+            new Chart(document.getElementById('competitiveAdvantageChart'), {
+                type: 'radar',
+                data: {
+                    labels: processLabels(['True Autonomy', 'Lights-Off Capability', 'Predictive Maintenance', 'Defect Elimination', 'Sustainability', 'Integration Ease']),
+                    datasets: [
+                        {
+                            label: 'Polycognition AI',
+                            data: [10, 9, 9, 10, 8, 9],
+                            backgroundColor: 'rgba(52, 126, 179, 0.2)',
+                            borderColor: PALETTE.primary,
+                            pointBackgroundColor: PALETTE.primary,
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Typical Competitors',
+                            data: [4, 3, 5, 6, 4, 7],
+                            backgroundColor: 'rgba(90, 193, 117, 0.2)',
+                            borderColor: PALETTE.secondary,
+                            pointBackgroundColor: PALETTE.secondary,
+                             borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'top', labels: { color: FONT_COLOR } },
+                        tooltip: universalTooltipCallback.plugins.tooltip
+                    },
+                    scales: {
+                        r: {
+                            angleLines: { color: GRID_COLOR },
+                            grid: { color: GRID_COLOR },
+                            pointLabels: { color: FONT_COLOR, font: { size: 11 } },
+                            ticks: { backdropColor: 'transparent', color: FONT_COLOR, stepSize: 2, beginAtZero: true }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
