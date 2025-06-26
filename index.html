@@ -78,14 +78,14 @@
             position: relative;
             width: 100%;
             max-width: 600px;
+            height: 320px; /* Slightly increased height */
+            max-height: 420px; /* Slightly increased max height */
             margin-left: auto;
             margin-right: auto;
-            height: 300px;
-            max-height: 400px;
         }
         @media (min-width: 768px) {
             .chart-container {
-                height: 350px;
+                height: 370px; /* Increased height for larger screens */
             }
         }
     </style>
@@ -320,14 +320,14 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div class="bg-white rounded-lg shadow-sm p-6">
                         <h3 class="text-2xl font-bold text-center mb-6 text-primary">AI in Manufacturing by Application (2023)</h3>
-                        <div class="chart-container h-72 md:h-80">
+                        <div class="chart-container h-[22rem] md:h-[28rem]">
                             <canvas id="marketApplicationChart"></canvas>
                         </div>
                         <p class="text-center text-gray-600 mt-6 text-sm">Our focus areas, predictive maintenance and quality control, represent rapidly gaining traction within AI applications.</p>
                     </div>
                     <div class="bg-white rounded-lg shadow-sm p-6">
                         <h3 class="text-2xl font-bold text-center mb-6 text-primary">AI in Manufacturing by End-Use Industry (2023)</h3>
-                        <div class="chart-container h-72 md:h-80">
+                        <div class="chart-container h-[22rem] md:h-[28rem]">
                             <canvas id="marketEndUseChart"></canvas>
                         </div>
                         <p class="text-center text-gray-600 mt-6 text-sm">We target high-value sectors like Medical Devices (dominant) and Automotive (fastest growing), where precision is paramount.</p>
@@ -415,7 +415,7 @@
             <div class="container mx-auto max-w-3xl">
                 <h2 class="text-3xl md:text-4xl font-bold mb-6 text-primary">Ready to Transform Your Manufacturing?</h2>
                 <p class="text-gray-300 text-xl mb-8 font-light">Schedule a personalized consultation and discover how Polycognition AI can deliver defect-free, lights-off production for your business.</p>
-                <a href="mailto:info@polycognition.ai" class="bg-secondary hover:bg-[#47A364] text-white font-bold py-4 px-10 rounded-full text-xl button-style inline-block">
+                <a href="mailto:invest@polycognition.ai" class="bg-secondary hover:bg-[#47A364] text-white font-bold py-4 px-10 rounded-full text-xl button-style inline-block">
                     Schedule a Consultation
                 </a>
             </div>
@@ -599,7 +599,11 @@
                         },
                         y: {
                            grid: { display: false },
-                           ticks: { color: FONT_COLOR }
+                           ticks: { 
+                               color: FONT_COLOR,
+                               autoSkip: false,
+                               font: { size: 12 }
+                           }
                         }
                     }
                 }
@@ -641,7 +645,11 @@
                         },
                         y: {
                            grid: { display: false },
-                           ticks: { color: FONT_COLOR }
+                           ticks: { 
+                               color: FONT_COLOR,
+                               autoSkip: false,
+                               font: { size: 12 }
+                           }
                         }
                     }
                 }
